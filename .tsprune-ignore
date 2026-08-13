@@ -1,0 +1,3 @@
+# Baseline ignore for ts-prune (one pattern per line)
+# Generated from tsconfig.json
+# Refresh after export moves/deletes: npm run deadcode:refresh

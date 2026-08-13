@@ -1,0 +1,79 @@
+{
+  "name": "booster-seat",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Quick-start template: CI/CD, AI delivery process, and a Vite+React CRUD scaffold",
+  "author": "davgor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davgor/BoosterSeat.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "assert:dist": "node scripts/assert-dist-index.mjs dist/index.html",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "vitest run && vitest run --config fireguard/vitest.config.ts",
+    "test:fireguard": "vitest run --config fireguard/vitest.config.ts",
+    "fireguard": "node fireguard/bin/fireguard.mjs",
+    "test:e2e": "npx playwright test",
+    "deploy": "npm run build && npm run assert:dist && echo \"Deploy via GitHub Actions. Set Settings → Pages → Source to GitHub Actions, then push to main.\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css}\" \"scripts/**/*.{mjs,js}\" \"fireguard/**/*.{ts,tsx,js,mjs,json}\" \".fireguardrc.json\" \"e2e/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css}\" \"scripts/**/*.{mjs,js}\" \"fireguard/**/*.{ts,tsx,js,mjs,json}\" \".fireguardrc.json\" \"e2e/**/*.{ts,tsx}\"",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" \"fireguard/**/*.{ts,tsx}\" --max-warnings 0",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" \"fireguard/**/*.{ts,tsx}\" --fix",
+    "type-check": "tsc --noEmit && tsc --noEmit -p fireguard/tsconfig.json",
+    "deadcode": "node scripts/deadcode-check.mjs",
+    "deadcode:refresh": "node scripts/deadcode-refresh.mjs",
+    "bump:minor": "node scripts/bump-minor-version.mjs",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix --max-warnings 0"
+    ],
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --write"
+    ],
+    "scripts/**/*.{mjs,js}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.18.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@playwright/test": "^1.33.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/minimatch": "^5.1.2",
+    "@types/node": "^22.13.10",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@typescript-eslint/eslint-plugin": "^8.56.0",
+    "@typescript-eslint/parser": "^8.56.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.39.2",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^17.3.0",
+    "husky": "^9.1.7",
+    "jsdom": "^28.1.0",
+    "lint-staged": "^15.2.0",
+    "minimatch": "^10.2.6",
+    "prettier": "^3.8.1",
+    "ts-prune": "^0.10.3",
+    "tsx": "^4.23.11",
+    "typescript": "^5.7.3",
+    "vite": "^6.4.3",
+    "vitest": "^4.1.10"
+  }
+}
