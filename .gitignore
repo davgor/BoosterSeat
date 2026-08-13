@@ -38,6 +38,9 @@ tsprune.new
 tsprune.ignore.patterns
 audit.json
 
+# Husky
+.husky/_
+
 # Playwright
 /test-results/
 /playwright-report/
