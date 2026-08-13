@@ -47,6 +47,10 @@ describe('assertProductionIndexHtml', () => {
     expect(() => assertProductionIndexHtml(DEV_HTML, 'live')).toThrow(/GitHub Actions/i);
   });
 
+  it('includes the label in the thrown message', () => {
+    expect(() => assertProductionIndexHtml(DEV_HTML, 'live-url')).toThrow(/live-url/);
+  });
+
   it('does not throw for production HTML', () => {
     expect(() => assertProductionIndexHtml(PRODUCTION_HTML)).not.toThrow();
   });

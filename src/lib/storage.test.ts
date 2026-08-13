@@ -47,4 +47,27 @@ describe('storage', () => {
     expect(loadItems(memoryStorage({ [STORAGE_KEY]: '{bad' }))).toEqual([]);
     expect(loadItems(memoryStorage({ [STORAGE_KEY]: '{"no":"array"}' }))).toEqual([]);
   });
+
+  it('filters non-item array entries', () => {
+    const payload = JSON.stringify([
+      null,
+      42,
+      'nope',
+      { id: 1, title: 'bad-types', notes: '', updatedAt: '' },
+      {
+        id: 'ok',
+        title: 'Valid',
+        notes: '',
+        updatedAt: '2026-01-01T00:00:00.000Z',
+      },
+    ]);
+    expect(loadItems(memoryStorage({ [STORAGE_KEY]: payload }))).toEqual([
+      {
+        id: 'ok',
+        title: 'Valid',
+        notes: '',
+        updatedAt: '2026-01-01T00:00:00.000Z',
+      },
+    ]);
+  });
 });

@@ -1,7 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi, afterEach } from 'vitest';
 import { createItem, removeItem, updateItem, upsertItem } from './items';
 
 describe('items', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it('creates an item with trimmed fields', () => {
     const item = createItem(
       { title: '  Buy milk  ', notes: '  2%' },
@@ -13,8 +17,19 @@ describe('items', () => {
     expect(item.id.length).toBeGreaterThan(0);
   });
 
+  it('falls back to a generated id when randomUUID is unavailable', () => {
+    vi.stubGlobal('crypto', {});
+    const item = createItem({ title: 'Fallback', notes: '' });
+    expect(item.id.startsWith('item-')).toBe(true);
+  });
+
   it('rejects blank titles on create', () => {
     expect(() => createItem({ title: '   ', notes: '' })).toThrow(/title/i);
+  });
+
+  it('rejects blank titles on update', () => {
+    const original = createItem({ title: 'Old', notes: '' });
+    expect(() => updateItem(original, { title: '  ', notes: 'x' })).toThrow(/title/i);
   });
 
   it('updates an existing item', () => {

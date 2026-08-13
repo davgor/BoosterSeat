@@ -32,4 +32,20 @@ describe('ItemsPage', () => {
     await user.click(within(list).getByRole('button', { name: /delete/i }));
     expect(screen.getByText(/no items yet/i)).toBeInTheDocument();
   });
+
+  it('exits edit mode when the edited item is deleted', async () => {
+    const user = userEvent.setup();
+    renderWithRouter(<ItemsPage />);
+
+    await user.type(screen.getByLabelText(/title/i), 'Transient');
+    await user.click(screen.getByRole('button', { name: /add item/i }));
+
+    const list = screen.getByRole('list', { name: /items/i });
+    await user.click(within(list).getByRole('button', { name: /edit/i }));
+    expect(screen.getByRole('form', { name: /edit item/i })).toBeInTheDocument();
+
+    await user.click(within(list).getByRole('button', { name: /delete/i }));
+    expect(screen.getByRole('form', { name: /create item/i })).toBeInTheDocument();
+    expect(screen.getByText(/no items yet/i)).toBeInTheDocument();
+  });
 });
