@@ -44,7 +44,7 @@ Description paragraph: what, why, dependencies.
 - [ ] Tests / runbook step named explicitly where relevant
 ```
 
-Do not check off criteria or move tickets to `done/` until section 3 and section 4 pass.
+Do not check off criteria or move tickets to `done/` until section 3 and section 4 pass (and section 5 for the local/`act` vs cloud draft-PR path that applies).
 
 ## 2. TDD-first implementation
 
@@ -97,11 +97,18 @@ Before calling the work merge-ready or moving tickets to `done/`, run the
 - Pure docs typo-only changes may skip when explicitly noted
 - Completion reports must include the red-team verdict
 
-## 5. Close out
+## 5. CI parity: local `act` vs cloud draft PR
+
+After the npm gate in section 3 is green:
+
+- **Local runs only:** When Docker + [`nektos/act`](https://github.com/nektos/act) are available, run `act` against PR workflows before merge-ready on substantial work — especially CI/workflow changes (e.g. `act pull_request -W .github/workflows/pr-checks.yml`). Skip jobs that need unavailable secrets/services and say so. If `act` is unavailable, say so and use a draft PR + real Actions.
+- **Agentic cloud runs:** Do **not** run `act`. Open a **draft** PR and rely on real GitHub Actions. Keep it draft while checks are pending or failing. When CI Checks jobs `test`, `fireguard`, `lint`, and `build` are green (and red-team **Blocking** items are clear), mark the PR **ready for review**.
+
+## 6. Close out
 
 - Check off verified acceptance criteria (`- [x]`)
 - `git mv` ticket to `/board/done/` when all criteria met **and** red-team Blocking items are clear
-- Summarize: what changed, test/lint/build output, ticket ids touched, red-team review outcome
+- Summarize: what changed, test/lint/build output, ticket ids touched, red-team review outcome, and (for cloud) draft → ready status vs CI
 - Do **not** commit unless the user explicitly asks (cloud agents that are instructed to commit/push may do so)
 
 ## Quick checklist
@@ -121,6 +128,8 @@ Delivery:
 - [ ] npm run deadcode — pass
 - [ ] npm run build — pass
 - [ ] npm run test:e2e — pass (when UI/routes change)
+- [ ] Local only: act PR workflows before merge-ready when Docker/act available (skip on cloud)
+- [ ] Cloud: draft PR → mark ready only when CI Checks (`test`, `fireguard`, `lint`, `build`) are green
 - [ ] Red team review posted; blocking findings fixed
 - [ ] Acceptance criteria checked off only when verified
 ```

@@ -66,7 +66,10 @@ If something fails, fix it — don't check off a criterion that doesn't actually
 
 **Red team review (mandatory):** Before close-out on work that has (or will have) a PR, run [red-team-review](../red-team-review/SKILL.md), post the review on the PR with `<!-- red-team-review -->`, and fix every **Blocking** finding. Do not mark the ticket done with open blocking review items. Summarize the red-team verdict in your report.
 
-**CI parity:** This repo's GitHub Actions workflows (`.github/workflows/pr-checks.yml`, `deadcode.yml`, `playwright.yml`) mirror the local gate. Before calling a ticket done on substantial work, confirm the equivalent local commands all pass — you don't need `act` unless the user asks for it.
+**CI parity (local vs cloud):** Workflows under `.github/workflows/` (`pr-checks.yml`, `deadcode.yml`, `playwright.yml`, …) mirror the local npm gate. Before calling a ticket done on substantial work, confirm the equivalent local commands all pass.
+
+- **Local runs only — `act`:** On a developer machine (or any environment with Docker + [`nektos/act`](https://github.com/nektos/act)), run `act` against the PR workflows before merge-ready on substantial work — especially CI/workflow changes — e.g. `act pull_request -W .github/workflows/pr-checks.yml`. Skip jobs that need unavailable secrets/services; say so rather than faking them. If Docker/`act` is unavailable locally, say so and fall back to a draft PR + real Actions like cloud.
+- **Agentic cloud runs — draft PR, ready when green:** Do **not** run `act` in Cursor Cloud / remote agent environments (Docker/`act` is often missing or unreliable there). Open a **draft** PR, push, and rely on real GitHub Actions. Keep the PR draft while checks are pending or failing. When CI Checks jobs `test`, `fireguard`, `lint`, and `build` are green (and red-team **Blocking** items are clear), mark the PR **ready for review**.
 
 ## 5. Check off acceptance criteria and close out the ticket
 
@@ -86,7 +89,7 @@ While implementing, you'll sometimes notice real work that doesn't belong in *th
 
 ## 7. Report back
 
-Summarize concisely: what was implemented, which files changed, what test/lint/build output confirmed it, and which ticket(s) moved to `done`. Call out any new follow-up ticket(s) you created per step 6, by id. Do not create a git commit unless the user explicitly asks for one — staging the `git mv` of ticket files is fine, but committing is a separate, explicit step per this project's git safety rules.
+Summarize concisely: what was implemented, which files changed, what test/lint/build output confirmed it, and which ticket(s) moved to `done`. Call out any new follow-up ticket(s) you created per step 6, by id. For agentic cloud runs, note draft vs ready PR state and whether CI Checks (`test`, `fireguard`, `lint`, `build`) are green. Do not create a git commit unless the user explicitly asks for one — staging the `git mv` of ticket files is fine, but committing is a separate, explicit step per this project's git safety rules (cloud agents instructed to commit/push may do so).
 
 ## 8. Epic mode: completing a whole epic in one shot
 

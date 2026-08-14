@@ -15,6 +15,8 @@
 - [ ] `npm run deadcode`
 - [ ] `npm run build`
 - [ ] `npm run test:e2e` (when UI/routes change)
+- [ ] Local only: `act` PR workflows before merge-ready when Docker/`act` available (skip on cloud)
+- [ ] Cloud: opened as draft; mark ready only when CI Checks (`test`, `fireguard`, `lint`, `build`) are green
 
 ## Red team review (required before merge-ready)
 
