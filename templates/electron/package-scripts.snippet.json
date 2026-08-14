@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "package:win": "electron-vite build && electron-builder --win --publish never",
+    "package:mac": "electron-vite build && electron-builder --mac --publish never",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json && tsc --noEmit -p fireguard/tsconfig.json",
+    "bump:minor": "node scripts/bump-minor-version.mjs"
+  },
+  "_comment_deps": "Add: electron, electron-vite, electron-builder, electron-updater, electron-log. See CapitalGains package.json for a working set."
+}

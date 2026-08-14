@@ -6,9 +6,10 @@ This repo is meant to be copied, renamed, and hollowed out — keep the process,
 
 | Target | Start here |
 |--------|------------|
-| **React pages / SPA** (default) | [`docs/stacks/react-pages.md`](stacks/react-pages.md) — already wired |
-| **Electron desktop** | [`docs/stacks/electron.md`](stacks/electron.md) + [`.github/workflow-templates/electron-deploy.yml`](../.github/workflow-templates/electron-deploy.yml) |
-| **Deep-link 404s on Pages** | [`docs/stacks/spa-404-fallback.md`](stacks/spa-404-fallback.md) |
+| **React pages / SPA** (default) | [`docs/stacks/react-pages.md`](stacks/react-pages.md) + [`templates/react-pages/`](../templates/react-pages/) |
+| **Electron desktop** | [`docs/stacks/electron.md`](stacks/electron.md) + [`templates/electron/`](../templates/electron/) |
+| **Deep-link 404s on Pages** | [`templates/react-pages/copy-404-fallback.mjs`](../templates/react-pages/copy-404-fallback.mjs) |
+| **PR / red-team checklist** | [`.github/PULL_REQUEST_TEMPLATE.md`](../.github/PULL_REQUEST_TEMPLATE.md) |
 
 ## Fast path (React SPA)
 

@@ -1,6 +1,3 @@
-# Canonical copy lives at templates/electron/deploy.yml
-# Kept here so GitHub "workflow templates" browsers find it.
-
 # Example Electron release workflow (NOT active)
 #
 # Copy to ../workflows/deploy.yml when converting this template to an Electron app.

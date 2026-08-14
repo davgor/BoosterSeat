@@ -21,8 +21,8 @@ BoosterSeat defaults to a **web SPA**. For a desktop app, keep the process layer
 | Auto-update | `electron-updater` + `docs/runbooks/auto-update.md` pattern |
 | Deadcode projects | Dual `tsconfig.node.json` + `tsconfig.web.json` in deadcode scripts |
 
-Starter workflow stub (copy into `.github/workflows/deploy.yml` when going Electron):  
-[`.github/workflow-templates/electron-deploy.yml`](../../.github/workflow-templates/electron-deploy.yml)
+Starter files (copy-ready): [`templates/electron/`](../../templates/electron/)  
+Deploy workflow stub: [`templates/electron/deploy.yml`](../../templates/electron/deploy.yml) (also under `.github/workflow-templates/`)
 
 ## Conversion checklist
 

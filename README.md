@@ -12,10 +12,12 @@ Quick-start template to copy when spinning up a new CRUD app. Steals the battle-
 | **Quality gates** | ESLint (0 warnings), Prettier, Vitest, Fireguard, ts-prune deadcode, Playwright |
 | **CI** | PR checks, deadcode, security audit, Playwright, auto-revert on main CI failure |
 | **Deploy** | GitHub Pages via Actions + production HTML smoke check |
-| **Stack playbooks** | React Pages (default) + Electron conversion docs/templates |
+| **Stack playbooks** | React Pages (default) + Electron conversion docs/templates under `templates/` |
+| **PR template** | Red-team + verification checklist (`.github/PULL_REQUEST_TEMPLATE.md`) |
 
 How to fork this into a real product: [`docs/using-this-template.md`](docs/using-this-template.md).  
-Stack guides: [`docs/stacks/react-pages.md`](docs/stacks/react-pages.md) · [`docs/stacks/electron.md`](docs/stacks/electron.md).
+Stack guides: [`docs/stacks/react-pages.md`](docs/stacks/react-pages.md) · [`docs/stacks/electron.md`](docs/stacks/electron.md).  
+Copy-ready files: [`templates/`](templates/).
 
 ## Engineering process
 
@@ -73,4 +75,4 @@ Deploy sets `BASE=/<repo-name>/` for project pages. After deploy, the workflow a
 
 ## Electron
 
-Not the default runtime. Use [`docs/stacks/electron.md`](docs/stacks/electron.md) and copy [`.github/workflow-templates/electron-deploy.yml`](.github/workflow-templates/electron-deploy.yml) when you need Win/Mac releases + auto-update (pattern from CapitalGains).
+Not the default runtime. Use [`docs/stacks/electron.md`](docs/stacks/electron.md) and copy files from [`templates/electron/`](templates/electron/) (window/preload snippets, scripts, `deploy.yml`, auto-update runbook) when you need Win/Mac releases.

@@ -27,11 +27,12 @@ Use this when the product is a browser app (CRUD UI, marketing site, dashboard) 
    - use HashRouter, or
    - add a `404.html` copy of `index.html` for GitHub Pages SPA fallback (not shipped by default; add when you need deep links on refresh).
 
-## Optional SPA additions worth stealing later
+## Optional SPA additions (templates)
 
-- `public/404.html` SPA fallback for deep links on Pages
-- Route-level code splitting (`React.lazy`) once the bundle grows
-- Env-based API base URL (`VITE_API_URL`) with `.env.example` (never commit secrets)
+Copy from [`templates/react-pages/`](../../templates/react-pages/):
+
+- `copy-404-fallback.mjs` + `postbuild` — deep-link refresh on Pages
+- `env.example` — document `VITE_*` without committing secrets
 - Vercel/Netlify: drop Pages `deploy.yml`, keep `assert:dist` if you still ship Vite `dist/`
 
 ## Red team angles for React Pages
