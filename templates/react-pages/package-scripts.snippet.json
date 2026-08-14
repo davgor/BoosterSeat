@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "postbuild": "node scripts/copy-404-fallback.mjs",
+    "assert:dist": "node scripts/assert-dist-index.mjs dist/index.html"
+  }
+}
