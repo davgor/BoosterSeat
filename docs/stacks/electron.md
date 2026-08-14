@@ -30,7 +30,7 @@ Starter workflow stub (copy into `.github/workflows/deploy.yml` when going Elect
 2. Split code into main / preload / renderer; **never** enable `nodeIntegration` in the renderer.
 3. Keep `contextIsolation: true` and expose APIs only via a typed preload bridge.
 4. Point Vitest / fireguard `include` at renderer + shared + main test globs.
-5. Update deadcode `PROJECTS` to both Electron tsconfigs (see CapitalGains `scripts/deadcode-check.mjs`).
+5. **Update deadcode `PROJECTS`** in `scripts/deadcode-check.mjs` and `scripts/deadcode-refresh.mjs` to both Electron tsconfigs (`tsconfig.node.json` + `tsconfig.web.json`, as in CapitalGains). Leaving the SPA-only `tsconfig.json` entry is a silent false sense of coverage.
 6. Replace Pages `deploy.yml` with the Electron release workflow template; keep `[skip ci]` on version bumps.
 7. Move `pr-checks` `test`/`build` to `windows-latest` if native modules (e.g. `better-sqlite3`) require it; keep fireguard on Ubuntu.
 8. Drop Playwright *or* keep it only for renderer flows you can drive headlessly; CapitalGains relies more on Vitest for engine code.
