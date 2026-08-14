@@ -61,8 +61,9 @@ Follow [`docs/stacks/electron.md`](stacks/electron.md). Replace Pages deploy wit
 2. TDD → implement
 3. Full verification gate in `.ai-instructions.md` (steps 1–10)
 4. **Red team review** (`.ai-instructions.md` step 11 / `red-team-review` skill) before merge-ready — fix Blocking findings
-5. Check off criteria; move ticket to `done/`
+5. **CI parity:** local runs may use `act` for PR workflows; agentic **cloud** runs skip `act`, keep a **draft** PR, and mark it **ready for review** only when required GitHub Actions checks are green
+6. Check off criteria; move ticket to `done/`
 
 ## Optional: Cursor cloud environment
 
-`.cursor/environment.json` is already present for install/start. For Electron, change `start` to your `electron-vite` / `npm run dev` desktop command and ensure the cloud image has any native build tooling you need.
+`.cursor/environment.json` is already present for install/start. For Electron, change `start` to your `electron-vite` / `npm run dev` desktop command and ensure the cloud image has any native build tooling you need. Cloud agents should not rely on `act` here — use the draft PR → ready-when-green path above.
