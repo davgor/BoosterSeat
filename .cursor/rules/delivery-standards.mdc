@@ -1,5 +1,5 @@
 ---
-description: TDD, lint/test/build gate, and /board ticket traceability for all implementation work
+description: TDD, lint/test/build gate, red-team review, and /board ticket traceability for all implementation work
 alwaysApply: true
 ---
 
@@ -21,7 +21,7 @@ Any implementation work in this repo must follow `.cursor/skills/delivery-standa
    - `npm run build`
    - `npm run test:e2e` (when UI/navigation/routes change)
 3. **Board traceability** — create a ticket in `/board/backlog/` or update the related epic/ticket before or as you start. If the user named a ticket id, use `complete-ticket` skill.
-4. **Antagonistic PR review** — before done/merge-ready, run `.cursor/skills/antagonistic-pr-review/SKILL.md`, post the review on the PR, and fix every **Blocking** finding. Applies to agent-authored PRs too.
+4. **Red team review (mandatory)** — before done/merge-ready, run `.cursor/skills/red-team-review/SKILL.md`, post the review on the PR with `<!-- red-team-review -->`, and fix every **Blocking** finding. Applies to agent-authored PRs too. See also `.cursor/rules/red-team-review.mdc` and `.ai-instructions.md` step 11.
 
 ## Also required
 

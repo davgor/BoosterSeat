@@ -2,7 +2,15 @@
 
 This repo is meant to be copied, renamed, and hollowed out — keep the process, replace the product.
 
-## Fast path
+## Pick a stack first
+
+| Target | Start here |
+|--------|------------|
+| **React pages / SPA** (default) | [`docs/stacks/react-pages.md`](stacks/react-pages.md) — already wired |
+| **Electron desktop** | [`docs/stacks/electron.md`](stacks/electron.md) + [`.github/workflow-templates/electron-deploy.yml`](../.github/workflow-templates/electron-deploy.yml) |
+| **Deep-link 404s on Pages** | [`docs/stacks/spa-404-fallback.md`](stacks/spa-404-fallback.md) |
+
+## Fast path (React SPA)
 
 1. **Create the new repo** from this one (GitHub “Use this template”, or clone + `git remote set-url`).
 2. **Rename the package** in `package.json` (`name`, `description`, `repository.url`).
@@ -26,11 +34,11 @@ This repo is meant to be copied, renamed, and hollowed out — keep the process,
 
 | Keep | Usually replace |
 |------|-----------------|
-| `.github/workflows/*` | `src/pages/*`, `src/components/*`, `src/lib/*` |
+| `.github/workflows/*` (or Electron template) | `src/pages/*`, `src/components/*`, `src/lib/*` |
 | `.cursor/`, `.claude/`, `.ai-instructions.md` | `e2e/*` specs (rewrite to your flows) |
-| `board/` workflow + skills | App-specific CSS / copy |
+| `board/` workflow + skills (incl. **red-team-review**) | App-specific CSS / copy |
 | `fireguard/` + `.fireguardrc.json` | `.tsprune-ignore` body (refresh) |
-| `scripts/deadcode-*.mjs`, `bump-minor-version.mjs` | Deploy host if not GitHub Pages |
+| `scripts/deadcode-*.mjs`, `bump-minor-version.mjs` | Deploy host if not GitHub Pages / Electron |
 
 ## Deploy options
 
@@ -44,23 +52,16 @@ Delete or disable `deploy.yml`, then add your host’s workflow (Vercel/Netlify/
 
 ### Electron / desktop
 
-Borrow packaging + release jobs from [CapitalGains](https://github.com/davgor/CapitalGains) (electron-vite, Win/Mac package, GitHub Release, auto-update). Keep this repo’s board/skills/fireguard/deadcode scripts; change `pr-checks` runners if you need Windows for native modules.
+Follow [`docs/stacks/electron.md`](stacks/electron.md). Replace Pages deploy with the Electron release template; keep board/skills/fireguard/deadcode.
 
 ## Agent workflow reminder
 
 1. Ticket on `/board` (or update an epic)
 2. TDD → implement
-3. Full verification gate in `.ai-instructions.md`
-4. `antagonistic-pr-review` before merge-ready
+3. Full verification gate in `.ai-instructions.md` (steps 1–10)
+4. **Red team review** (`.ai-instructions.md` step 11 / `red-team-review` skill) before merge-ready — fix Blocking findings
 5. Check off criteria; move ticket to `done/`
 
 ## Optional: Cursor cloud environment
 
-Add `.cursor/environment.json` in the new repo if you want cloud agents to install/start automatically, for example:
-
-```json
-{
-  "install": "npm ci",
-  "start": "npm run dev -- --host 0.0.0.0 --port 5173"
-}
-```
+`.cursor/environment.json` is already present for install/start. For Electron, change `start` to your `electron-vite` / `npm run dev` desktop command and ensure the cloud image has any native build tooling you need.

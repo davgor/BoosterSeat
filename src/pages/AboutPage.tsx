@@ -8,8 +8,13 @@ export default function AboutPage() {
         <code>board/</code>, and <code>fireguard/</code> unless you intentionally diverge.
       </p>
       <p>
-        Read <code>docs/using-this-template.md</code> for the rename checklist and optional deploy
-        swaps.
+        Stack guides: <code>docs/stacks/react-pages.md</code> (default SPA) and{' '}
+        <code>docs/stacks/electron.md</code> (desktop conversion). Agents must run a{' '}
+        <strong>red team review</strong> before calling work done — see{' '}
+        <code>.ai-instructions.md</code>.
+      </p>
+      <p>
+        Full fork checklist: <code>docs/using-this-template.md</code>.
       </p>
     </section>
   );

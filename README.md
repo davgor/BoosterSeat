@@ -7,20 +7,22 @@ Quick-start template to copy when spinning up a new CRUD app. Steals the battle-
 | Layer | Contents |
 |-------|----------|
 | **App scaffold** | Vite + React + TS localStorage CRUD (`Items` + `About`) |
-| **Agent process** | `.ai-instructions.md`, `.cursor/` + `.claude/` skills, always-on delivery rule |
+| **Agent process** | `.ai-instructions.md`, delivery + **red-team** skills/rules (Cursor + Claude) |
 | **Board** | `/board/{backlog,in-progress,done}` markdown tickets |
 | **Quality gates** | ESLint (0 warnings), Prettier, Vitest, Fireguard, ts-prune deadcode, Playwright |
 | **CI** | PR checks, deadcode, security audit, Playwright, auto-revert on main CI failure |
 | **Deploy** | GitHub Pages via Actions + production HTML smoke check |
+| **Stack playbooks** | React Pages (default) + Electron conversion docs/templates |
 
-How to fork this into a real product: [`docs/using-this-template.md`](docs/using-this-template.md).
+How to fork this into a real product: [`docs/using-this-template.md`](docs/using-this-template.md).  
+Stack guides: [`docs/stacks/react-pages.md`](docs/stacks/react-pages.md) · [`docs/stacks/electron.md`](docs/stacks/electron.md).
 
 ## Engineering process
 
 - **TDD-first.** Tests before implementation for components, pages, stores, and helpers. See `.cursor/skills/delivery-standards/SKILL.md`.
 - **Strict lint.** ESLint `--max-warnings 0`. Never relax rules to make code pass — fix the code. After edits: follow [`.ai-instructions.md`](.ai-instructions.md).
 - **TypeScript strict.** No `any` escapes.
-- **Antagonistic PR review.** Before merge-ready, run `antagonistic-pr-review` and fix every **Blocking** finding — including on agent-authored PRs.
+- **Red team review (mandatory).** Before merge-ready / ticket `done`, run `red-team-review` (alias: `antagonistic-pr-review`), post on the PR, and fix every **Blocking** finding — including on agent-authored PRs. See [`.ai-instructions.md`](.ai-instructions.md) step 11.
 - **Ticket board.** Work under `/board` (`backlog/` → `in-progress/` → `done/`). Epics `NNN-*.md`, sub-tickets `NNN.M-*.md`. Skills: `complete-ticket`, `collapse-epic`.
 - **No secrets committed.** `.env` stays gitignored.
 
@@ -68,3 +70,7 @@ Treat `test`, `fireguard`, `lint`, and `build` as **required status checks** for
 **Required:** repo **Settings → Pages → Build and deployment → Source = GitHub Actions** (not “Deploy from a branch”).
 
 Deploy sets `BASE=/<repo-name>/` for project pages. After deploy, the workflow asserts `dist/index.html` (and the live URL) look like a production Vite build, not the `/src/main.tsx` dev entry.
+
+## Electron
+
+Not the default runtime. Use [`docs/stacks/electron.md`](docs/stacks/electron.md) and copy [`.github/workflow-templates/electron-deploy.yml`](.github/workflow-templates/electron-deploy.yml) when you need Win/Mac releases + auto-update (pattern from CapitalGains).

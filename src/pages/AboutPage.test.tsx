@@ -8,5 +8,7 @@ describe('AboutPage', () => {
     renderWithRouter(<AboutPage />);
     expect(screen.getByRole('heading', { name: /about this booster seat/i })).toBeInTheDocument();
     expect(screen.getByText(/docs\/using-this-template\.md/i)).toBeInTheDocument();
+    expect(screen.getByText(/red team review/i)).toBeInTheDocument();
+    expect(screen.getByText(/docs\/stacks\/electron\.md/i)).toBeInTheDocument();
   });
 });
