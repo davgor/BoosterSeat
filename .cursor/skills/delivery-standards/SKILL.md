@@ -128,7 +128,7 @@ Delivery:
 - [ ] npm run deadcode — pass
 - [ ] npm run build — pass
 - [ ] npm run test:e2e — pass (when UI/routes change)
-- [ ] Local only: act PR workflows when validating CI (skip on cloud)
+- [ ] Local only: act PR workflows before merge-ready when Docker/act available (skip on cloud)
 - [ ] Cloud: draft PR → mark ready only when CI Checks (`test`, `fireguard`, `lint`, `build`) are green
 - [ ] Red team review posted; blocking findings fixed
 - [ ] Acceptance criteria checked off only when verified
