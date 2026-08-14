@@ -25,7 +25,7 @@ Copy-ready files: [`templates/`](templates/).
 - **Strict lint.** ESLint `--max-warnings 0`. Never relax rules to make code pass — fix the code. After edits: follow [`.ai-instructions.md`](.ai-instructions.md).
 - **TypeScript strict.** No `any` escapes.
 - **Red team review (mandatory).** Before merge-ready / ticket `done`, run `red-team-review` (alias: `antagonistic-pr-review`), post on the PR, and fix every **Blocking** finding — including on agent-authored PRs. See [`.ai-instructions.md`](.ai-instructions.md) step 11.
-- **CI parity.** Local runs may use [`nektos/act`](https://github.com/nektos/act) for Actions workflows. Agentic cloud runs skip `act`, open a **draft** PR, and mark it **ready for review** only when required checks are green. See [`.ai-instructions.md`](.ai-instructions.md).
+- **CI parity.** Local runs use [`nektos/act`](https://github.com/nektos/act) for Actions parity when Docker/`act` are available. Agentic cloud runs skip `act`, open a **draft** PR, and mark it **ready for review** only when CI Checks (`test`, `fireguard`, `lint`, `build`) are green. See [`.ai-instructions.md`](.ai-instructions.md).
 - **Ticket board.** Work under `/board` (`backlog/` → `in-progress/` → `done/`). Epics `NNN-*.md`, sub-tickets `NNN.M-*.md`. Skills: `complete-ticket`, `collapse-epic`.
 - **No secrets committed.** `.env` stays gitignored.
 

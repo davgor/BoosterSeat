@@ -101,8 +101,8 @@ Before calling the work merge-ready or moving tickets to `done/`, run the
 
 After the npm gate in section 3 is green:
 
-- **Local runs only:** Use [`nektos/act`](https://github.com/nektos/act) to exercise PR workflows when validating CI/workflow changes or wanting Actions parity (e.g. `act pull_request -W .github/workflows/pr-checks.yml`). Skip jobs that need unavailable secrets/services and say so.
-- **Agentic cloud runs:** Do **not** run `act`. Open a **draft** PR and rely on real GitHub Actions. Keep it draft while checks are pending or failing. When required checks are green and red-team **Blocking** items are clear, mark the PR **ready for review**.
+- **Local runs only:** When Docker + [`nektos/act`](https://github.com/nektos/act) are available, run `act` against PR workflows before merge-ready on substantial work — especially CI/workflow changes (e.g. `act pull_request -W .github/workflows/pr-checks.yml`). Skip jobs that need unavailable secrets/services and say so. If `act` is unavailable, say so and use a draft PR + real Actions.
+- **Agentic cloud runs:** Do **not** run `act`. Open a **draft** PR and rely on real GitHub Actions. Keep it draft while checks are pending or failing. When CI Checks jobs `test`, `fireguard`, `lint`, and `build` are green (and red-team **Blocking** items are clear), mark the PR **ready for review**.
 
 ## 6. Close out
 
@@ -129,7 +129,7 @@ Delivery:
 - [ ] npm run build — pass
 - [ ] npm run test:e2e — pass (when UI/routes change)
 - [ ] Local only: act PR workflows when validating CI (skip on cloud)
-- [ ] Cloud: draft PR → mark ready only when required checks are green
+- [ ] Cloud: draft PR → mark ready only when CI Checks (`test`, `fireguard`, `lint`, `build`) are green
 - [ ] Red team review posted; blocking findings fixed
 - [ ] Acceptance criteria checked off only when verified
 ```

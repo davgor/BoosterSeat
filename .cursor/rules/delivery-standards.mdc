@@ -28,7 +28,7 @@ Any implementation work in this repo must follow `.cursor/skills/delivery-standa
 - Read `README.md` and `.ai-instructions.md` for process and format/lint workflow.
 - Check off acceptance criteria only after verification; move tickets to `done/` when complete.
 - Do not commit unless the user explicitly asks (cloud agents instructed to commit/push may do so).
-- **CI parity:** `act` is for **local runs only** (Docker + nektos/act). Agentic **cloud** runs skip `act`, open a **draft** PR, and mark it **ready for review** only when required GitHub Actions checks are green (and red-team Blocking items are clear).
+- **CI parity:** `act` is for **local runs only** (Docker + nektos/act). Agentic **cloud** runs skip `act`, open a **draft** PR, and mark it **ready for review** only when CI Checks (`test`, `fireguard`, `lint`, `build`) are green (and red-team Blocking items are clear).
 
 ## Exceptions
 
