@@ -20,7 +20,7 @@ merge something that looks done but is soft under pressure. Your job is to
 
 **Hard requirement** before:
 
-- Moving a board ticket to `done/`
+- Accepting a Dark Mechanicus ticket (`accept_attempt`), or moving a markdown board ticket to `done/`
 - Claiming a PR is merge-ready / complete
 - Asking a human to merge
 
@@ -36,9 +36,10 @@ explicitly waives the review.
 2. Read the changed code paths — do not review from the PR summary alone.
 3. Attack these angles (skip only if truly N/A, and say why):
    - **Correctness** — logic bugs, race conditions, dirty worktree risk, bad exit codes
-   - **Gate evasion** — can an agent skip fireguard / lint / tests / red-team by shaping the diff?
+   - **Gate evasion** — can an agent skip fireguard / lint / tests / red-team / the Dark Mechanicus board check by shaping the diff?
+   - **Board honesty** — every criterion marked met in `submit_attempt` / `accept_attempt` (or checked off in a markdown ticket) is actually shown by a test or command; no forced readiness or hand-edited `.darkmechanicus/` files
    - **Test honesty** — tautologies, missing edge cases, tests that cannot fail
-   - **Security** — secrets, unsafe `spawn`/`shell`, token misuse, path traversal, XSS, open redirects
+   - **Security** — secrets, unsafe `spawn`/`shell`, token misuse (including Dark Mechanicus claim tokens in commits, logs, PR bodies, or comments), path traversal, XSS, open redirects
    - **Electron (when applicable)** — `nodeIntegration`, missing `contextIsolation`, privileged preload leaks, remote content
    - **SPA / Pages (when applicable)** — wrong `base`, client-router 404s, shipping Vite dev HTML, broken asset paths
    - **CI reality** — shallow clones, permissions, flake budget lies, non-failing continues
@@ -52,7 +53,7 @@ explicitly waives the review.
    - Prefer `gh pr review --request-changes --body ...` when any **Blocking** item exists
    - Otherwise `gh pr review --comment --body ...`
    - Body must include marker `<!-- red-team-review -->` (legacy `<!-- antagonistic-pr-review -->` also OK) and a checklist of findings with file paths
-6. Open or update a board ticket for blocking/should-fix items if they are not fixed in the same turn.
+6. Record blocking/should-fix items on the board if they are not fixed in the same turn: on Dark Mechanicus, `reject_attempt` with them as reasons (or `add_comment` on the ticket); on the markdown board, open or update a ticket.
 
 ## Required review body shape
 
@@ -81,7 +82,7 @@ Verdict: <one harsh sentence>
 
 ## After the review
 
-- You may **not** mark the related ticket **done** or claim the PR is ready while any
+- You may **not** accept or mark the related ticket **done** or claim the PR is ready while any
   **Blocking** item is unchecked.
 - Fix blocking findings (TDD-first), push, and reply on the PR with what changed.
 - Re-run the delivery verification gate after fixes (see `.ai-instructions.md`).

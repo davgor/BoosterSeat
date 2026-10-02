@@ -1,6 +1,8 @@
 # BoosterSeat
 
-Quick-start template to copy when spinning up a new CRUD app. Steals the battle-tested process from [CapitalGains](https://github.com/davgor/CapitalGains) and [davgor.github.io](https://github.com/davgor/davgor.github.io): CI/CD, fireguard, board tickets, Cursor/Claude skills, and a replaceable Vite + React + TypeScript CRUD scaffold.
+Quick-start template to copy when spinning up a new CRUD app. Steals the battle-tested process from [CapitalGains](https://github.com/davgor/CapitalGains) and [davgor.github.io](https://github.com/davgor/davgor.github.io): CI/CD, fireguard, a [Dark Mechanicus](https://github.com/davgor/DarkMechanicus) ticket board, Cursor/Claude skills, and a replaceable Vite + React + TypeScript CRUD scaffold.
+
+> **Dark Mechanicus is required by default.** Until a repo made from this template is initialized for Dark Mechanicus, agent sessions, `npm install`, `npm run dev`, commits, and CI all warn about it loudly. Set it up with [`docs/dark-mechanicus.md`](docs/dark-mechanicus.md), or opt out with `"board": "markdown"` in `.boosterseatrc.json`.
 
 ## What you get
 
@@ -8,7 +10,7 @@ Quick-start template to copy when spinning up a new CRUD app. Steals the battle-
 |-------|----------|
 | **App scaffold** | Vite + React + TS localStorage CRUD (`Items` + `About`) |
 | **Agent process** | `.ai-instructions.md`, delivery + **red-team** skills/rules (Cursor + Claude) |
-| **Board** | `/board/{backlog,in-progress,done}` markdown tickets |
+| **Board** | [Dark Mechanicus](docs/dark-mechanicus.md) (required by default, noisy until set up); legacy `/board` markdown tickets as an opt-out |
 | **Quality gates** | ESLint (0 warnings), Prettier, Vitest, Fireguard, ts-prune deadcode, Playwright |
 | **CI** | PR checks, deadcode, security audit, Playwright, auto-revert on main CI failure |
 | **Deploy** | GitHub Pages via Actions + production HTML smoke check |
@@ -25,7 +27,7 @@ Copy-ready files: [`templates/`](templates/).
 - **Strict lint.** ESLint `--max-warnings 0`. Never relax rules to make code pass — fix the code. After edits: follow [`.ai-instructions.md`](.ai-instructions.md).
 - **TypeScript strict.** No `any` escapes.
 - **Red team review (mandatory).** Before merge-ready / ticket `done`, run `red-team-review` (alias: `antagonistic-pr-review`), post on the PR, and fix every **Blocking** finding — including on agent-authored PRs. See [`.ai-instructions.md`](.ai-instructions.md) step 11.
-- **Ticket board.** Work under `/board` (`backlog/` → `in-progress/` → `done/`). Epics `NNN-*.md`, sub-tickets `NNN.M-*.md`. Skills: `complete-ticket`, `collapse-epic`.
+- **Ticket board.** Work is tracked on Dark Mechanicus: epics and tickets with acceptance criteria, driven over MCP, with sprint checkpoints a person approves in the desktop app. `npm run board:check` reports whether the repo is set up. Opting out (`"board": "markdown"` in `.boosterseatrc.json`) switches back to markdown tickets under `/board` (`backlog/` → `in-progress/` → `done/`). Skills: `complete-ticket` (both boards), `collapse-epic` (markdown only). See [`docs/dark-mechanicus.md`](docs/dark-mechanicus.md).
 - **No secrets committed.** `.env` stays gitignored.
 
 ## Commands
@@ -44,6 +46,7 @@ npm run deadcode     # ts-prune vs .tsprune-ignore
 npm run deadcode:refresh
 npm run build
 npm run assert:dist  # after build — production HTML shape
+npm run board:check  # Dark Mechanicus board set up? (--strict to fail instead of warn)
 ```
 
 ## CI
@@ -54,6 +57,7 @@ npm run assert:dist  # after build — production HTML shape
 - `fireguard` — grades **new** Vitest unit tests vs `main`; letter **F** fails; sticky PR comment
 - `lint` — `npm run lint` + `npm run format:check`
 - `build` — `npm run type-check` && `npm run build`
+- `board` — `scripts/check-darkmechanicus.mjs --github`; warning annotations when Dark Mechanicus is not set up (non-blocking; add `--strict` to enforce)
 
 Also included:
 

@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/check-darkmechanicus.mjs\" --hook",
+            "timeout": 10,
+            "statusMessage": "Checking the Dark Mechanicus board"
+          }
+        ]
+      }
+    ]
+  }
+}

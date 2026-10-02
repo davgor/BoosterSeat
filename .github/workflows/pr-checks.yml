@@ -69,3 +69,16 @@ jobs:
       - run: npm ci
       - run: npm run type-check
       - run: npm run build
+
+  board:
+    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message || '', '[skip ci]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Loud but non-blocking: annotates the run when Dark Mechanicus is not set up for this repo.
+      # Append --strict to make a missing setup fail the job.
+      - name: Dark Mechanicus board check
+        run: node scripts/check-darkmechanicus.mjs --github

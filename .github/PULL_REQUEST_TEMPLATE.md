@@ -4,7 +4,8 @@
 
 ## Board
 
-- Ticket(s): <!-- e.g. 003.2 -->
+- Ticket(s): <!-- Dark Mechanicus key, e.g. BS-12 (markdown board opt-out: e.g. 003.2) -->
+- [ ] `npm run board:check` — Dark Mechanicus ready (or repo opted out with `"board": "markdown"`)
 
 ## Verification
 

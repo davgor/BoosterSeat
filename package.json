@@ -10,6 +10,7 @@
     "url": "https://github.com/davgor/BoosterSeat.git"
   },
   "scripts": {
+    "predev": "node scripts/check-darkmechanicus.mjs",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -20,15 +21,16 @@
     "fireguard": "node fireguard/bin/fireguard.mjs",
     "test:e2e": "npx playwright test",
     "deploy": "npm run build && npm run assert:dist && echo \"Deploy via GitHub Actions. Set Settings → Pages → Source to GitHub Actions, then push to main.\"",
-    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css}\" \"scripts/**/*.{mjs,js}\" \"fireguard/**/*.{ts,tsx,js,mjs,json}\" \".fireguardrc.json\" \"e2e/**/*.{ts,tsx}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css}\" \"scripts/**/*.{mjs,js}\" \"fireguard/**/*.{ts,tsx,js,mjs,json}\" \".fireguardrc.json\" \"e2e/**/*.{ts,tsx}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css}\" \"scripts/**/*.{mjs,js}\" \"fireguard/**/*.{ts,tsx,js,mjs,json}\" \".fireguardrc.json\" \".boosterseatrc.json\" \"e2e/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css}\" \"scripts/**/*.{mjs,js}\" \"fireguard/**/*.{ts,tsx,js,mjs,json}\" \".fireguardrc.json\" \".boosterseatrc.json\" \"e2e/**/*.{ts,tsx}\"",
     "lint": "eslint \"src/**/*.{ts,tsx}\" \"fireguard/**/*.{ts,tsx}\" --max-warnings 0",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" \"fireguard/**/*.{ts,tsx}\" --fix",
     "type-check": "tsc --noEmit && tsc --noEmit -p fireguard/tsconfig.json",
     "deadcode": "node scripts/deadcode-check.mjs",
     "deadcode:refresh": "node scripts/deadcode-refresh.mjs",
     "bump:minor": "node scripts/bump-minor-version.mjs",
-    "prepare": "husky"
+    "board:check": "node scripts/check-darkmechanicus.mjs",
+    "prepare": "husky && node scripts/check-darkmechanicus.mjs"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [

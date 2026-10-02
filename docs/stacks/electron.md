@@ -5,7 +5,7 @@ BoosterSeat defaults to a **web SPA**. For a desktop app, keep the process layer
 ## What to keep from BoosterSeat
 
 - `.cursor/`, `.claude/`, `.ai-instructions.md`, red-team + delivery skills
-- `/board` ticket workflow
+- Dark Mechanicus board check and skills (`docs/dark-mechanicus.md`; markdown `/board` as opt-out)
 - `fireguard/` + `.fireguardrc.json`
 - `scripts/deadcode-*.mjs`, `scripts/bump-minor-version.mjs`
 - PR checks / deadcode / security-audit / auto-revert *ideas* (adjust runners)

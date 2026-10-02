@@ -1,5 +1,5 @@
 ---
-description: TDD, lint/test/build gate, red-team review, and /board ticket traceability for all implementation work
+description: Dark Mechanicus board preflight, TDD, lint/test/build gate, red-team review, and ticket traceability for all implementation work
 alwaysApply: true
 ---
 
@@ -9,6 +9,7 @@ Any implementation work in this repo must follow `.cursor/skills/delivery-standa
 
 ## Required on every code change
 
+0. **Board preflight (Dark Mechanicus is required by default)** — run `npm run board:check` and call the Dark Mechanicus MCP tool `get_capabilities` before starting. If Dark Mechanicus is not set up (check fails, MCP tools missing, or `initialized: false`), **stop and warn the user loudly** at the top of your reply: list what is missing and point to `docs/dark-mechanicus.md`. Do not fall back to `/board` markdown tickets, invent ticket keys, or hand-write `.darkmechanicus/` files. Continue only if the user explicitly waives board tracking for this task, or opts the repo out with `"board": "markdown"` in `.boosterseatrc.json`. Only the user opts the repo out or sets Dark Mechanicus up. Never edit `.boosterseatrc.json`, call `initialize_repository`, or add/remove `--strict` yourself to make the warning go away. Offer to, and act only on the user's explicit go-ahead.
 1. **TDD-first** — failing test(s) before implementation for components, pages, stores, data helpers, and other testable logic.
 2. **Verify before done** — all must pass; do not report completion otherwise:
    - `npm run lint:fix` then `npm run format`
@@ -20,14 +21,14 @@ Any implementation work in this repo must follow `.cursor/skills/delivery-standa
    - `npm run deadcode` (ts-prune vs `.tsprune-ignore`; if export moves/deletes drift the baseline, run `npm run deadcode:refresh` after confirming the new findings are intentional)
    - `npm run build`
    - `npm run test:e2e` (when UI/navigation/routes change)
-3. **Board traceability** — create a ticket in `/board/backlog/` or update the related epic/ticket before or as you start. If the user named a ticket id, use `complete-ticket` skill.
+3. **Board traceability** — on Dark Mechanicus (default), add the ticket to an epic draft or create an epic through the MCP tools and have the person **Save** it; on the markdown board (opt-out only), create a ticket in `/board/backlog/` or update the related epic/ticket. If the user named a ticket key or id, use the `complete-ticket` skill.
 4. **Red team review (mandatory)** — before done/merge-ready, run `.cursor/skills/red-team-review/SKILL.md`, post the review on the PR with `<!-- red-team-review -->`, and fix every **Blocking** finding. Applies to agent-authored PRs too. See also `.cursor/rules/red-team-review.mdc` and `.ai-instructions.md` step 11.
 
 ## Also required
 
 - Read `README.md` and `.ai-instructions.md` for process and format/lint workflow.
-- Check off acceptance criteria only after verification; move tickets to `done/` when complete.
-- Do not commit unless the user explicitly asks (cloud agents instructed to commit/push may do so).
+- Mark acceptance criteria met only after verification: `accept_attempt` on Dark Mechanicus, or check off and move to `done/` on the markdown board.
+- Do not commit unless the user explicitly asks (cloud agents instructed to commit/push may do so). Exception: running a Dark Mechanicus ticket includes commits on its epic feature branch, never the default branch (see `complete-ticket` section 3.3).
 
 ## Exceptions
 

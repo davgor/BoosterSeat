@@ -1,1 +1,3 @@
+# Loud but non-blocking: warns when Dark Mechanicus is not set up for this repo.
+node scripts/check-darkmechanicus.mjs
 npx lint-staged

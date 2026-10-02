@@ -38,6 +38,9 @@ tsprune.new
 tsprune.ignore.patterns
 audit.json
 
+# Agent MCP config (machine-specific paths; see docs/dark-mechanicus.md)
+.cursor/mcp.json
+
 # Husky
 .husky/_
 

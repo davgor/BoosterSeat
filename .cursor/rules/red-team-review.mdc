@@ -5,8 +5,9 @@ alwaysApply: true
 
 # Red team review (required before completion)
 
-Before marking implementation work **done**, moving tickets to `board/done/`, or
-calling a PR merge-ready, you **must** run the red-team review gate:
+Before marking implementation work **done**, accepting a Dark Mechanicus ticket
+(`accept_attempt`), moving markdown tickets to `board/done/`, or calling a PR
+merge-ready, you **must** run the red-team review gate:
 
 → `.cursor/skills/red-team-review/SKILL.md`
 

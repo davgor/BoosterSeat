@@ -1,11 +1,13 @@
 ---
 name: collapse-epic
-description: Collapse a fully-done epic in board/done — merge every sub-ticket's (NNN.M) full content into the parent epic file (NNN-*.md) under a "## Sub-tickets" section, then delete the now-redundant sub-ticket files. Use right after an epic's last sub-ticket gets checked off and the epic file is moved into board/done (including automatically at the end of complete-ticket's epic mode), or whenever the user says to collapse/merge/fold a completed epic's tickets into the epic file.
+description: Markdown board only (repos that set "board" to "markdown" in .boosterseatrc.json; Dark Mechanicus, the default board, keeps completed epics as read-only history and needs no collapsing). Collapse a fully-done epic in board/done — merge every sub-ticket's (NNN.M) full content into the parent epic file (NNN-*.md) under a "## Sub-tickets" section, then delete the now-redundant sub-ticket files. Use right after an epic's last sub-ticket gets checked off and the epic file is moved into board/done (including automatically at the end of complete-ticket's epic mode), or whenever the user says to collapse/merge/fold a completed epic's tickets into the epic file.
 ---
 
 # Collapse a completed epic
 
 Mirrors `.claude/skills/collapse-epic/SKILL.md` — keep both in sync when changing workflow rules.
+
+**Markdown board only.** This applies when `.boosterseatrc.json` sets `"board": "markdown"`. On the default Dark Mechanicus board, a completed epic is already kept as read-only history (`search_history`) and there are no per-ticket files to fold. If asked to collapse an epic there, say so and stop. Never edit `.darkmechanicus/` files by hand.
 
 When every sub-ticket `NNN.M` of an epic is in `board/done/` and the epic index file `NNN-*.md` has also been moved there, the per-sub-ticket files are now pure history — their content belongs inside the epic file instead of as 5-25 separate files cluttering `board/done/`. This skill folds them in and removes the duplicates.
 
@@ -48,4 +50,4 @@ Name the epic collapsed, how many sub-tickets were folded in, and confirm no con
 
 ## When this fires automatically
 
-`complete-ticket`'s closing steps (single-ticket section 5, epic-mode section 8.7) move an epic's index file to `board/done/` once its last sub-ticket is done. Immediately after that move, invoke this skill on that epic so `board/done/` never accumulates an uncollapsed epic.
+`complete-ticket`'s markdown-mode closing steps (single-ticket section 4.4, epic-mode section 4.7) move an epic's index file to `board/done/` once its last sub-ticket is done. Immediately after that move, invoke this skill on that epic so `board/done/` never accumulates an uncollapsed epic.

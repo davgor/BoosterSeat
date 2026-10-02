@@ -16,8 +16,9 @@ This repo is meant to be copied, renamed, and hollowed out — keep the process,
 1. **Create the new repo** from this one (GitHub “Use this template”, or clone + `git remote set-url`).
 2. **Rename the package** in `package.json` (`name`, `description`, `repository.url`).
 3. **Swap branding** in `index.html` title, `src/App.tsx` brand text, and `src/index.css` tokens if you want a new look.
-4. **Replace `src/`** with your CRUD domain (keep `src/test/`, or adapt it). Leave `fireguard/`, `.github/`, `.cursor/`, `.claude/`, `board/`, and `scripts/` unless you have a reason.
-5. **Reset the board** — archive or delete done tickets; start a new `001-*.md` epic for the product.
+4. **Replace `src/`** with your CRUD domain (keep `src/test/`, or adapt it). Leave `fireguard/`, `.github/`, `.cursor/`, `.claude/`, `.boosterseatrc.json`, and `scripts/` unless you have a reason.
+5. **Set up Dark Mechanicus** (required; everything warns until you do). Follow [`docs/dark-mechanicus.md`](dark-mechanicus.md): track the folder in the desktop app, initialize, commit `.darkmechanicus/`, connect your agent over MCP, and install the agent skills. Then plan the product's first epic there. Delete the template's `board/` directory, since its tickets are BoosterSeat history.
+   - Opting out instead: set `"board": "markdown"` in `.boosterseatrc.json`, delete the done tickets in `board/done/`, and start a new `001-*.md` epic.
 6. **Refresh deadcode baseline** after the first real app lands:
    ```bash
    npm run deadcode:refresh
@@ -28,7 +29,7 @@ This repo is meant to be copied, renamed, and hollowed out — keep the process,
 8. **Run the gate once**:
    ```bash
    npm install
-   npm run lint && npm run format:check && npm run test:unit && npm run type-check && npm run deadcode && npm run build
+   npm run board:check && npm run lint && npm run format:check && npm run test:unit && npm run type-check && npm run deadcode && npm run build
    ```
 
 ## What to keep vs replace
@@ -37,7 +38,7 @@ This repo is meant to be copied, renamed, and hollowed out — keep the process,
 |------|-----------------|
 | `.github/workflows/*` (or Electron template) | `src/pages/*`, `src/components/*`, `src/lib/*` |
 | `.cursor/`, `.claude/`, `.ai-instructions.md` | `e2e/*` specs (rewrite to your flows) |
-| `board/` workflow + skills (incl. **red-team-review**) | App-specific CSS / copy |
+| Board skills + `.boosterseatrc.json` + board check (incl. **red-team-review**) | App-specific CSS / copy |
 | `fireguard/` + `.fireguardrc.json` | `.tsprune-ignore` body (refresh) |
 | `scripts/deadcode-*.mjs`, `bump-minor-version.mjs` | Deploy host if not GitHub Pages / Electron |
 
@@ -53,15 +54,18 @@ Delete or disable `deploy.yml`, then add your host’s workflow (Vercel/Netlify/
 
 ### Electron / desktop
 
-Follow [`docs/stacks/electron.md`](stacks/electron.md). Replace Pages deploy with the Electron release template; keep board/skills/fireguard/deadcode.
+Follow [`docs/stacks/electron.md`](stacks/electron.md). Replace Pages deploy with the Electron release template; keep the board check, skills, fireguard, and deadcode.
 
 ## Agent workflow reminder
 
-1. Ticket on `/board` (or update an epic)
-2. TDD → implement
-3. Full verification gate in `.ai-instructions.md` (steps 1–10)
-4. **Red team review** (`.ai-instructions.md` step 11 / `red-team-review` skill) before merge-ready — fix Blocking findings
-5. Check off criteria; move ticket to `done/`
+1. `npm run board:check` — if Dark Mechanicus is not set up, the agent stops and tells you
+2. Ticket on the Dark Mechanicus board (or update an epic draft; a person presses **Save**)
+3. Claim → TDD → implement
+4. Full verification gate in `.ai-instructions.md` (steps 1–10)
+5. **Red team review** (`.ai-instructions.md` step 11 / `red-team-review` skill) before merge-ready — fix Blocking findings
+6. Submit with evidence; accept only when every criterion is verified; a person approves sprint checkpoints in the desktop app
+
+(Markdown opt-out: ticket on `/board`, check off criteria, move it to `done/`.)
 
 ## Optional: Cursor cloud environment
 
